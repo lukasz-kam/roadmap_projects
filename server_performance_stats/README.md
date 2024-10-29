@@ -8,4 +8,4 @@
   ```
   ./server_stats.sh
   ```
-### [Link to the project details](https://roadmap.sh/projects/server-stats).
+### Link to the project details: [https://roadmap.sh/projects/server-stats](https://roadmap.sh/projects/server-stats).
