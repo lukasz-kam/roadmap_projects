@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Tool for compressing .log files from given directory
+#
+# Usage: log-archive <dir-name>
+
+find_logs() {
+  find "${1}" -type f -name "*.log"
+}
+
+compress_logs() {
+  local timestamp
+  timestamp=$(date +%Y%m%d_%H%M%S)
+  local logs_files="$1"
+
+  echo "$logs_files" | xargs tar -czvf "logs_archive_${timestamp}.tar.gz"
+}
+
+main() {
+  local logs_files
+  logs_files=$(find_logs "$1")
+
+  if [[ -z "$logs_files" ]]; then
+    echo "The specified directory does not contain any log files."
+    exit 1
+  fi
+
+  compress_logs "${logs_files}"
+}
+
+main "$@"
