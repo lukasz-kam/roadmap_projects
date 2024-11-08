@@ -1,0 +1,10 @@
+[Unit]
+Description=Dummy service which prints simple message to log file every 10 seconds.
+
+[Service]
+ExecStart=/bin/bash SCRIPT_PATH
+Type=simple
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
