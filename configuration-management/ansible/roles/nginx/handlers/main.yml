@@ -1,0 +1,6 @@
+- name: Change owner of nginx html directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    owner: nginx
+    group: nginx
+    mode: '0755'

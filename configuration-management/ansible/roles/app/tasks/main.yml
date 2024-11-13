@@ -1,0 +1,21 @@
+- name: Copy tarball to server
+  ansible.builtin.copy:
+    src: website.tar.gz
+    dest: /tmp/website.tar.gz
+
+- name: Ensure nginx html directory exists
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+    owner: nginx
+    group: nginx
+    mode: '0755'
+
+- name: Unpack tarball to nginx folder
+  ansible.builtin.unarchive:
+    src: /tmp/website.tar.gz
+    dest: /usr/share/nginx/html
+    remote_src: yes
+    owner: nginx
+    group: nginx
+    mode: '0755'

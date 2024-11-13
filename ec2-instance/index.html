@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static webpage example</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #hello-text {
+      font-size: 3em;
+      margin: 0;
+      border-right: 0.15em solid white;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .github-icon {
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    .github-icon img {
+      width: 50px;
+      height: 50px;
+      filter: invert(1);
+    }
+
+    .github-icon a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="hello-text"></h1>
+
+  <div class="github-icon">
+    <a href="https://github.com/lukasz-kam/" target="_blank" rel="noopener noreferrer">
+      <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
+    </a>
+  </div>
+
+  <script>
+    const text = " Hello";
+    const helloText = document.getElementById("hello-text");
+    let index = 0;
+
+    function typeEffect() {
+      if (index < text.length) {
+        helloText.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 150);
+      } else {
+        setTimeout(() => {
+          helloText.innerHTML = "";
+          index = 0;
+          typeEffect();
+        }, 1000); //
+      }
+    }
+
+    typeEffect();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+- name: Update yum cache
+  become: yes
+  yum:
+    update_cache: yes
+
+- name: Install fail2ban
+  become: yes
+  yum:
+    name: fail2ban
+    state: present
+
+- name: Copy fail2ban configuration
+  copy:
+    dest: /etc/fail2ban/jail.local
+    content: |
+      [DEFAULT]
+      bantime  = 600
+      findtime  = 600
+      maxretry = 3
+
+      [sshd]
+      enabled = true
+  notify: Restart fail2ban

@@ -1,0 +1,33 @@
+- name: Set read only permissions to ssh key
+  hosts: localhost
+  tasks:
+    - name: Get key path from inventory using awk
+      ansible.builtin.shell: awk 'NR > 1 {print $3}' < inventory | awk -F '=' '{print $2}'
+      register: ssh_key_path
+
+    - name: Set permissions
+      ansible.builtin.command: chmod 400 "{{ ssh_key_path.stdout }}"
+
+
+- hosts: ec2_server
+  become: true
+  tasks:
+    - name: Install nginx
+      yum:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Enable and start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy index.html to nginx folder
+      copy:
+        src: ../index.html
+        dest: /usr/share/nginx/html/index.html
+        owner: nginx
+        group: nginx
+        mode: '0644'

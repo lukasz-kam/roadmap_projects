@@ -1,0 +1,13 @@
+- name: Configure server and deploy website
+  hosts: ec2_server
+  become: yes
+
+  roles:
+    - role: base
+      tags: [base]
+    - role: nginx
+      tags: [nginx]
+    - role: app
+      tags: [app]
+    - role: ssh
+      tags: [ssh]
